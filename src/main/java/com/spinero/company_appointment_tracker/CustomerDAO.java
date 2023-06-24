@@ -1,48 +1,53 @@
 package com.spinero.company_appointment_tracker;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
     public class CustomerDAO {
         // Database connection details
-        private final String url = "jdbc:mysql://localhost:3306/c195db"; // replace with your database url
-        private final String user = "admin"; // Db username
-        private final String password = "p@nCak3z!"; // Db password
+        private static final String url = "jdbc:mysql://localhost:3306/c195db"; // replace with your database url
+        private static final String user = "admin"; // Db username
+        private static final String password = "p@nCak3z!"; // Db password
 
-        public void addCustomer(Customer customer) throws SQLException {
-            String sql = "INSERT INTO customers (Name, Address, PostalCode, Phone, Division_ID) VALUES (?, ?, ?, ?, ?)";
+        public static void addCustomer(Customer customer) throws SQLException {
+            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Division_ID, Country_ID) VALUES (?, ?, ?, ?, ?, ?)";
 
             try (Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                pstmt.setString(1, customer.getName());
-                pstmt.setString(2, customer.getAddress());
-                pstmt.setString(3, customer.getPostalCode());
-                pstmt.setString(4, customer.getPhoneNumber());
-                pstmt.setInt(5, customer.getDivisionId()); // assuming division ID is an integer
+                findCustomer(customer, pstmt);
 
                 pstmt.executeUpdate();
+
             }
         }
 
 
 
-        public void updateCustomer(Customer customer) throws SQLException {
-            String sql = "UPDATE customers SET Name = ?, Address = ?, PostalCode = ?, Phone = ?, Division_ID = ? WHERE Customer_ID = ?";
+        private static void findCustomer(Customer customer, PreparedStatement pstmt) throws SQLException {
+            pstmt.setString(1, customer.getName());
+            pstmt.setString(2, customer.getAddress());
+            pstmt.setString(3, customer.getPostalCode());
+            pstmt.setString(4, customer.getPhoneNumber());
+            pstmt.setInt(5, customer.getDivisionId());
+            pstmt.setInt(6, customer.getCountryId());
+        }
+
+
+        public static void updateCustomer(Customer customer) throws SQLException {
+            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Division_ID = ?, Country_ID = ? WHERE Customer_ID = ?";
 
             try (Connection conn = DriverManager.getConnection(url, user, password);
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                pstmt.setString(1, customer.getName());
-                pstmt.setString(2, customer.getAddress());
-                pstmt.setString(3, customer.getPostalCode());
-                pstmt.setString(4, customer.getPhoneNumber());
-                pstmt.setInt(5, customer.getDivisionId()); // assuming division ID is an integer
-                pstmt.setInt(6, customer.getId());
+                findCustomer(customer, pstmt);
+                pstmt.setInt(7, customer.getId());
 
                 pstmt.executeUpdate();
             }
         }
+
 
         public void deleteCustomer(int id) throws SQLException {
             String deleteAppointmentsSql = "DELETE FROM appointments WHERE Customer_ID = ?";
@@ -73,11 +78,12 @@ import java.util.List;
                 while (rs.next()) {
                     Customer customer = new Customer();
                     customer.setId(rs.getInt("Customer_ID"));
-                    customer.setName(rs.getString("Name"));
+                    customer.setName(rs.getString("Customer_Name"));
                     customer.setAddress(rs.getString("Address"));
-                    customer.setPostalCode(rs.getString("PostalCode"));
+                    customer.setPostalCode(rs.getString("Postal_Code"));
                     customer.setPhoneNumber(rs.getString("Phone"));
-                    customer.setDivisionId(rs.getInt("Division_ID")); // assuming division ID is an integer
+                    customer.setDivisionId(rs.getInt("Division_ID"));
+                    customer.setCountryId(rs.getInt("Country_ID"));
 
                     customers.add(customer);
                 }
@@ -85,5 +91,6 @@ import java.util.List;
 
             return customers;
         }
+
 
     }

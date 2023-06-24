@@ -6,8 +6,8 @@ public class Customer {
     private String address;
     private String postalCode;
     private String phoneNumber;
-    private String division; // First-level division
-    private String country;
+    private int division; // First-level division
+    private int country;
 
     // Getters and setters for each field
     //
@@ -52,19 +52,19 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getDivision() {
+    public int getDivisionId() {
         return division;
     }
 
-    public void setDivision(String division) {
+    public void setDivisionId(int division) {
         this.division = division;
     }
 
-    public String getCountry() {
+    public int getCountryId() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountryId(int country) {
         this.country = country;
     }
 }
