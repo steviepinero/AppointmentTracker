@@ -74,4 +74,26 @@ public class CustomerUI extends Application {
 
 layout.getChildren().add(addButton);
 
+    Button updateButton = new Button("Update Customer");
+updateButton.setOnAction(e -> {
+        Customer selectedCustomer = table.getSelectionModel().getSelectedItem();
+        if (selectedCustomer != null) {
+            selectedCustomer.setName(nameField.getText());
+            selectedCustomer.setAddress(addressField.getText());
+            selectedCustomer.setPostalCode(postalCodeField.getText());
+            selectedCustomer.setPhoneNumber(phoneNumberField.getText());
+            selectedCustomer.setDivisionId(divisionBox.getSelectionModel().getSelectedIndex()); // assuming division IDs correspond to combo box indices
+
+            try {
+                customerDAO.updateCustomer(selectedCustomer);
+                table.refresh(); // Refresh table to show updated data
+            } catch (SQLException ex) {
+                // Handle exception
+            }
+        }
+    });
+
+layout.getChildren().add(updateButton);
+
+
 }
