@@ -1,29 +1,40 @@
 package com.spinero.company_appointment_tracker;
-
+import javafx.fxml.FXML;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.sql.SQLException;
 
 
-public class CustomerUI extends Application {
-    private TableView<Customer> table;
-    private TextField customerName, addressField, postalCodeField, phoneNumberField;
-    private ComboBox<String> divisionBox, countryBox;
+public class CustomerController extends Application {
+    @FXML
+    public TableView<Customer> table;
+    @FXML
+    public TextField customerName, addressField, postalCodeField, phoneNumberField;
+    @FXML
+    public ComboBox<String> divisionBox, countryBox;
+    @FXML
+    public Button addButton, updateButton, deleteButton;
+
 
     @Override
-    public void start(Stage primaryStage) {
-        // Initialize UI components
-        table = new TableView<>();
-        customerName = new TextField();
-        addressField = new TextField();
-        postalCodeField = new TextField();
-        phoneNumberField = new TextField();
-        divisionBox = new ComboBox<>();
-        countryBox = new ComboBox<>();
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomerView.fxml"));
+
+        loader.setController(this);
+        VBox layout = loader.load();
+
+        // Set up stage
+        primaryStage.setTitle("Customer Management");
+        Scene scene = new Scene(layout, 1280, 800);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
 
         // Create columns for table
         TableColumn<Customer, String> customerNameColumn = new TableColumn<>("Name");
@@ -45,7 +56,6 @@ public class CustomerUI extends Application {
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
 
-
         table.getColumns().addAll(customerNameColumn, addressColumn, postalCodeColumn, phoneNumberColumn, divisionColumn, countryColumn);
 
         // Load data from database
@@ -56,17 +66,7 @@ public class CustomerUI extends Application {
             // TODO Handle exception
         }
 
-        // Add components to layout and set scene
-        VBox layout = new VBox(10, table, customerName, addressField, postalCodeField, phoneNumberField, divisionBox, countryBox);
-        Scene scene = new Scene(layout, 1280, 800);
-
-        // Set up stage
-        primaryStage.setTitle("Customer Management");
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
         // Event handlers for add, update, and delete buttons
-        Button addButton = new Button("Add Customer");
         addButton.setOnAction(e -> {
             Customer customer = new Customer();
             customer.setName(customerName.getText());
@@ -85,7 +85,6 @@ public class CustomerUI extends Application {
 
         layout.getChildren().add(addButton);
 
-        Button updateButton = new Button("Update Customer");
         updateButton.setOnAction(e -> {
             Customer selectedCustomer = table.getSelectionModel().getSelectedItem();
             if (selectedCustomer != null) {

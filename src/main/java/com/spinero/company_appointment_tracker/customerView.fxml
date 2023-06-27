@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.spinero.company_appointment_tracker.CustomerController"
+            prefHeight="400.0" prefWidth="600.0">
+    <?xml version="1.0" encoding="UTF-8"?>
+
+    <?import javafx.scene.control.*?>
+    <?import javafx.scene.layout.*?>
+
+    <VBox spacing="10" xmlns:fx="http://javafx.com/fxml">
+        <TableView fx:id="table">
+            <columns>
+                <TableColumn fx:id="customerNameColumn" text="Name"/>
+                <TableColumn fx:id="addressColumn" text="Address"/>
+                <TableColumn fx:id="postalCodeColumn" text="Postal Code"/>
+                <TableColumn fx:id="phoneNumberColumn" text="Phone Number"/>
+                <TableColumn fx:id="divisionColumn" text="Division"/>
+                <TableColumn fx:id="countryColumn" text="Country"/>
+            </columns>
+        </TableView>
+        <TextField fx:id="customerName" promptText="Customer Name"/>
+        <TextField fx:id="addressField" promptText="Address"/>
+        <TextField fx:id="postalCodeField" promptText="Postal Code"/>
+        <TextField fx:id="phoneNumberField" promptText="Phone Number"/>
+        <ComboBox fx:id="divisionBox" promptText="Division"/>
+        <ComboBox fx:id="countryBox" promptText="Country"/>
+        <HBox spacing="10">
+            <Button fx:id="addButton" text="Add Customer"/>
+            <Button fx:id="updateButton" text="Update Customer"/>
+            <Button fx:id="deleteButton" text="Delete Customer"/>
+        </HBox>
+    </VBox>
+
+
+</AnchorPane>
