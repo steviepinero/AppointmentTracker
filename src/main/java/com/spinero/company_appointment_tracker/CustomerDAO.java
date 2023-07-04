@@ -1,5 +1,8 @@
 package com.spinero.company_appointment_tracker;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -67,8 +70,8 @@ import java.util.List;
             }
         }
 
-        public List<Customer> getAllCustomers() throws SQLException {
-            List<Customer> customers = new ArrayList<>();
+        public TableView<Customer> getAllCustomers() throws SQLException {
+            TableView<Customer> customers = new TableView<>();
             String sql = "SELECT * FROM customers";
 
             try (Connection conn = DriverManager.getConnection(url, user, password);
@@ -85,7 +88,7 @@ import java.util.List;
                     customer.setDivisionId(rs.getInt("Division_ID"));
                     customer.setCountryId(rs.getInt("Country_ID"));
 
-                    customers.add(customer);
+                    customers.setItems((ObservableList<Customer>) customer);
                 }
             }
 

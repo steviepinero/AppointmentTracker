@@ -36,7 +36,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.spinero.company_appointment_tracker.CustomerController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -79,8 +81,8 @@
                      <children>
                         <TextField fx:id="customerAddress" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="238.0" promptText="Address" />
                         <TextField fx:id="customerPostalCode" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="148.0" promptText="Postal Code" GridPane.columnIndex="1" />
-                        <TextField fx:id="customerPostalCode1" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="238.0" promptText="Country" GridPane.rowIndex="1" />
-                        <TextField fx:id="customerPostalCode11" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="19.0" prefWidth="97.0" promptText="Division ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="customerCountry" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="238.0" promptText="Country" GridPane.rowIndex="1" />
+                        <TextField fx:id="divisionId" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="19.0" prefWidth="97.0" promptText="Division ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -95,11 +97,11 @@
                      <children>
                         <TextField fx:id="customerFirstName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="236.0" promptText="First Name" />
                         <TextField fx:id="customerPhoneNumber" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="238.0" promptText="888-555-0123" GridPane.rowIndex="1" />
-                        <TextField fx:id="customerPostalCode111" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="19.0" prefWidth="97.0" promptText="Customer ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="customerId" disable="true" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="19.0" prefWidth="97.0" promptText="Customer ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="customerLastName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="269.0" promptText="Last Name" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
-                  <TableView fx:id="table" prefHeight="130.0" prefWidth="649.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2">
+                  <TableView fx:id="customers" prefHeight="130.0" prefWidth="649.0" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" GridPane.rowSpan="2">
                     <columns>
                       <TableColumn prefWidth="75.0" text="Name" />
                       <TableColumn prefWidth="75.0" text="Address" />
